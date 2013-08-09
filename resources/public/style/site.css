@@ -1,0 +1,16 @@
+form {
+    position:relative;
+}
+input[type=text] {
+    background-color:transparent;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    top: 100px;
+    left: 100px;
+    border: none;
+    text-align: center;
+    font-size: 14pt;
+    outline:none;
+}
