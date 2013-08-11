@@ -22,7 +22,7 @@ App.VoteChart = function(data) {
 
     //create and position svg canvas
     function attach(element) {
-        svg = d3.select(element).append("svg:svg")
+        svg = d3.select(element)
             .attr("width", w)
             .attr("height", h)
             .append("g")
