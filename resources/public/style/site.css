@@ -1,16 +1,38 @@
+html {
+    background: url('../image/Hankyu_Ferry_-_Tsukushi_-_Restaurant_-_01_blur.JPG') no-repeat center center fixed; 
+    font-family:'Droid Sans', sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 form {
     position:relative;
 }
 input[type=text] {
     background-color:transparent;
+    border: none;
+    color:#fff;
+    text-align: center;
+    font-size: 14pt;
     position: absolute;
+    outline:none;
     width: 200px;
     height: 200px;
     border-radius: 100px;
-    top: 100px;
-    left: 100px;
-    border: none;
-    text-align: center;
-    font-size: 14pt;
-    outline:none;
+    top: 150px;
+    left: 200px;
+    cursor:pointer;
+}
+input[type=text]:focus::-webkit-input-placeholder { color:transparent; }
+input[type=text]::-webkit-input-placeholder { color: #FFF; }
+input[type=text]:focus::-moz-placeholder { color:transparent; }
+input[type=text]::-moz-placeholder { color: #FFF; }
+input[type=text]:focus::-ms-input-placeholder { color:transparent; }
+input[type=text]:-ms-input-placeholder { color: #FFF; }
+input[type=text]:focus::input-placeholder { color:transparent; }
+input[type=text]:input-placeholder { color: #FFF; }
+
+svg text {
+    fill:#fff;
 }
