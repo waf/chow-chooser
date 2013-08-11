@@ -5,13 +5,15 @@ App.controller('AppCtrl', function($socket, $scope) {
     chart.attach("form");
     $scope.user = Math.floor(Math.random() * 100);
 
-    $socket.connect("ws://localhost:8000/realtime/");
+    var host = window.location.host;
+    $socket.connect("ws://" + host + "/realtime/");
     $socket.on("connect", function() {
         $socket.send("init");
     });
     $socket.on("init", function(allVotes) {
         for(var r in allVotes) {
-            updateVotes(r, allVotes[r][0]);
+            $scope.votes.push({restaurant:r, users:allVotes[r]});
+        chart.update();
         }
     });
     function updateVotes(restaurant, user) {
@@ -30,7 +32,7 @@ App.controller('AppCtrl', function($socket, $scope) {
         chart.update();
     }
     $socket.on("vote", function(newVote) {
-        updateVotes(newVote.restaurant, newVote.user);
+        updateVotes(newVote.restaurant, newVote.user, true);
     });
     $scope.voteSubmitted = function(r) {
         updateVotes(r, $scope.user);
