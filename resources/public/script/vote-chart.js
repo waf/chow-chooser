@@ -1,4 +1,4 @@
-App.VoteChart = function(data) {
+App.VoteChart = function() {
     var svg, placeholder,
         w = 600;
         h = 500;
@@ -32,8 +32,14 @@ App.VoteChart = function(data) {
             .attr("fill", "#EFEFEF");
     }
     //redraw the chart based on its data
-    function update() {
-        var pieData = pie(data);
+    function update(data) {
+        // we have a map, make it an array for d3
+        var transformed = [];
+        for(var key in data) {
+            transformed.push({restaurant:key, users:data[key]});
+        }
+
+        var pieData = pie(transformed);
         if(pieData.length > 0){
             placeholder.remove();
 

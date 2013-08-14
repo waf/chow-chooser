@@ -5,8 +5,8 @@
             [clojure.data.json :as json]))
 
 (defn vote-message [request]
-  (vote-mgr/add-vote (:restaurant request) (:user request))
-  request) ;the request is the delta message response
+  (if (vote-mgr/add-vote (:restaurant request) (:user request))
+    request)) ;the request is the delta message response
 
 (defn initial-state-message []
   (assoc @vote-mgr/votes :cmd "init"))
