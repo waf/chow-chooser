@@ -1,4 +1,4 @@
-App.VoteChart = function() {
+App.VoteChart = function(user) {
     var svg, placeholder,
         w = 600;
         h = 500;
@@ -71,6 +71,14 @@ App.VoteChart = function() {
                 var val = (n.startAngle + n.endAngle - Math.PI)/2;
                 return "translate(" + Math.cos(val) * (r+textOffset) + "," + Math.sin(val) * (r+textOffset) + ")";
             };
+        },
+        mark: function(d, i) {
+            var i = interpolate(this, d);
+            return function(t) {
+                var n = i(t);
+                var val = (n.startAngle + n.endAngle - Math.PI)/2;
+                return "translate(" + Math.cos(val) * (r-40) + "," + Math.sin(val) * (r-40) + ")";
+            };
         }
     };
     var render = {
@@ -115,6 +123,19 @@ App.VoteChart = function() {
                            "end";
                 })
             valueLabels.exit().remove();
+
+            var voteMarks = svg.selectAll("text").data(pieData, key);
+            voteMarks.enter().append("text");
+            voteMarks
+                .attr("class","checkmark")
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .transition().duration(tweenDuration).attrTween("transform", tween.mark)
+                .text(function(d) { 
+                    if(d.data.users.indexOf(user) > -1) 
+                        return "✓" 
+                })
+            voteMarks.exit().remove();
         }
     };
     return {

@@ -12,17 +12,17 @@ App.controller('AppCtrl', function($socket, $scope) {
         castVote(data.restaurant, $scope.user);
     };
 
-    var chart = App.VoteChart($scope.votes);
+    var chart = App.VoteChart($scope.user);
     chart.attach("svg");
     webSocketInit();
 
     function castVote(restaurant, user) {
-        if(!restaurant || !user ||
-           userHasVotedForRestaurant(restaurant, user)) {
+        if(!restaurant || !user)
            return;
-        }
-        updateLocalVotes(restaurant, user)
-        updateRemoteVotes(restaurant, user)
+
+        var vote = userHasVotedForRestaurant(restaurant, user) ? -1 : 1;
+        updateLocalVotes(restaurant, user, vote);
+        updateRemoteVotes(restaurant, user, vote);
     }
 
     function webSocketInit() {
@@ -38,14 +38,20 @@ App.controller('AppCtrl', function($socket, $scope) {
             updateLocalVotes(newVote.restaurant, newVote.user);
         });
     }
-    function updateLocalVotes(restaurant, user) {
+    function updateLocalVotes(restaurant, user, amount) {
         if(!$scope.votes[restaurant])
             $scope.votes[restaurant] = [];
-        $scope.votes[restaurant].push(user);
+        if(amount > 0) {
+            $scope.votes[restaurant].push(user);
+        } else {
+            var toDelete = $scope.votes[restaurant].indexOf(user);
+            $scope.votes[restaurant].splice(toDelete, 1);
+        }
+            
         chart.update($scope.votes);
     }
-    function updateRemoteVotes(restaurant, user) {
-        $socket.send('vote', {restaurant:restaurant, user: user});
+    function updateRemoteVotes(restaurant, user, amount) {
+        $socket.send('vote', {restaurant:restaurant, user:user, amount:amount});
     }
     function userHasVotedForRestaurant(restaurant, user) {
         return $scope.votes[restaurant] && 
