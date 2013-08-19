@@ -5,8 +5,11 @@
             [clojure.data.json :as json]))
 
 (defn vote-message [request]
-  (if (vote-mgr/add-vote (:restaurant request) (:user request))
-    request)) ;the request is the delta message response
+  (if (> (:amount request) 0)
+    (if (vote-mgr/add-vote (:restaurant request) (:user request))
+      request)
+    (if (vote-mgr/remove-vote (:restaurant request) (:user request))
+      request)))
 
 (defn initial-state-message []
   (assoc @vote-mgr/votes :cmd "init"))
@@ -21,7 +24,7 @@
       "init" (channel-mgr/targeted-response channel (initial-state-message))
       "vote" (channel-mgr/broadcast-response channel (vote-message request)))))
 
-(defn message-handler [request]
+(defn channel-callbacks [request]
   (with-channel request channel
     (on-close channel (partial close-message channel))
     (on-receive channel (partial message-router channel))))

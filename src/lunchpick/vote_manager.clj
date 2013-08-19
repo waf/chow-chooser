@@ -10,4 +10,7 @@
       (not (= old (count (@votes restaurant)))))))
 
 (defn remove-vote [restaurant user]
-  (swap! votes update-in [restaurant] disj user))
+  (let [old (count (@votes restaurant))]
+    (do
+      (swap! votes update-in [restaurant] disj user)
+      (not (= old (count (@votes restaurant)))))))

@@ -35,7 +35,7 @@ App.controller('AppCtrl', function($socket, $scope) {
             chart.update($scope.votes);
         });
         $socket.on("vote", function(newVote) {
-            updateLocalVotes(newVote.restaurant, newVote.user);
+            updateLocalVotes(newVote.restaurant, newVote.user, newVote.amount);
         });
     }
     function updateLocalVotes(restaurant, user, amount) {

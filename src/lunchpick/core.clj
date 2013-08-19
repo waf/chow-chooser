@@ -8,7 +8,7 @@
 
 (defroutes app-routes
   (GET "/" [] (response/redirect "/index.html"))
-  (GET "/realtime/" [] handler/message-handler)
+  (GET "/realtime/" [] handler/channel-callbacks)
   (resources "/") ; reads from default filesystem location "resources/public"
   (not-found "Not Found"))
 
