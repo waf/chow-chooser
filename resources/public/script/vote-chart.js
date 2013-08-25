@@ -124,13 +124,18 @@ App.VoteChart = function(user) {
                 })
             valueLabels.exit().remove();
 
-            var voteMarks = svg.selectAll("text").data(pieData, key);
-            voteMarks.enter().append("text");
+            var voteMarks = svg.selectAll("text.checkmark").data(pieData, key);
+            voteMarks.enter().append("text").attr("class","checkmark");
             voteMarks
                 .attr("class","checkmark")
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
-                .transition().duration(tweenDuration).attrTween("transform", tween.mark)
+                .attr("transform", function(d) {
+                    var val = (d.startAngle + d.endAngle - Math.PI)/2;
+                    return "translate(" + Math.cos(val) * (r-40) + "," + Math.sin(val) * (r-40) + ")";
+                })
+                .style("opacity", 0)
+                .transition().duration(tweenDuration).style("opacity",1)
                 .text(function(d) { 
                     if(d.data.users.indexOf(user) > -1) 
                         return "✓" 

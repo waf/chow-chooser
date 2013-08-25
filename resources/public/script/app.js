@@ -44,8 +44,12 @@ App.controller('AppCtrl', function($socket, $scope) {
         if(amount > 0) {
             $scope.votes[restaurant].push(user);
         } else {
-            var toDelete = $scope.votes[restaurant].indexOf(user);
-            $scope.votes[restaurant].splice(toDelete, 1);
+            if($scope.votes[restaurant].length === 1) {
+                delete $scope.votes[restaurant];
+            } else {
+                var toDelete = $scope.votes[restaurant].indexOf(user);
+                $scope.votes[restaurant].splice(toDelete, 1);
+            }
         }
             
         chart.update($scope.votes);
