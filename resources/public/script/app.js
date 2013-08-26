@@ -1,6 +1,8 @@
 var App = angular.module('app', ['ngCookies']);
 App.controller('AppCtrl', function($socket, $scope, $cookies) {
     $scope.votes = {};
+    $scope.history = [];
+    $scope.winner = [];
     $scope.user = $cookies.user = $cookies.user || prompt("Please enter your name:");
     $scope.voteSubmitted = function() {
         castVote(this.restaurant, $scope.user);
@@ -33,17 +35,35 @@ App.controller('AppCtrl', function($socket, $scope, $cookies) {
         $socket.on("init", function(allVotes) {
             $scope.votes = allVotes;
             chart.update($scope.votes);
+            updateWinner();
         });
         $socket.on("vote", function(newVote) {
             updateLocalVotes(newVote.restaurant, newVote.user, newVote.amount);
         });
     }
+    function updateWinner() {
+        var max = [];
+        var maxcount = 0;
+        for(var r in $scope.votes) {
+            var current = $scope.votes[r].length;
+            if(current > maxcount ) {
+                max = [r];
+                maxcount = current
+            } else if (current === maxcount) {
+                max.push(r);
+            }
+        }
+        $scope.winner = max;
+    }
     function updateLocalVotes(restaurant, user, amount) {
-        if(!$scope.votes[restaurant])
-            $scope.votes[restaurant] = [];
+        var log = user; 
         if(amount > 0) {
+            log += " voted for " + restaurant;
+            if(!$scope.votes[restaurant])
+                $scope.votes[restaurant] = [];
             $scope.votes[restaurant].push(user);
         } else {
+            log += " removed a vote for " + restaurant;
             if($scope.votes[restaurant].length === 1) {
                 delete $scope.votes[restaurant];
             } else {
@@ -51,7 +71,8 @@ App.controller('AppCtrl', function($socket, $scope, $cookies) {
                 $scope.votes[restaurant].splice(toDelete, 1);
             }
         }
-            
+        updateWinner();
+        $scope.history.push({time:Date.now(),text:log});
         chart.update($scope.votes);
     }
     function updateRemoteVotes(restaurant, user, amount) {

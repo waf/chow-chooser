@@ -18,6 +18,29 @@
         <form name="lunchform" id="lunchform" ng-submit="voteSubmitted(restaurant)">
             <input class="new-restaurant" placeholder="+ Add a Restaurant" type="text" name="restaurant" id="restaurant" ng-model="restaurant" autocomplete="off" maxlength="20" />
             <svg ng-click="svgClicked($event)"></svg>
+            <div class="sidebar">
+                <div class="current-status" ng-switch="winner.length">
+                    <h2>Top Chow Choice</h2>
+                    <p ng-switch-when="0">
+                        No Votes! Suggest a restaurant to the left.
+                    </p>
+                    <p ng-switch-when="1">
+                        Let's go to <strong class="restaurant">{{winner[0]}}!</strong>
+                    </p>
+                    <p ng-switch-default>
+                        It's a tie between 
+                        <span ng-repeat="restaurant in winner"><span ng-show="$middle">,</span>
+                            <span ng-show="$last">and</span>
+                            <strong class="restaurant">{{restaurant}}!</strong></span>
+                    </p>
+                </div>
+                <div class="history">
+                    <h2>Activity</h2>
+                    <ol>
+                        <li ng-repeat="logitem in history | orderBy:'-time' | limitTo:5" ng-animate="'animate'">{{logitem.text}}</li>
+                    </ol>
+                </div>
+            </div>
         </form>
         <p class="tagline">All aboard the lunch train</p>
     </body>
