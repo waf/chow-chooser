@@ -1,4 +1,4 @@
-# LunchPick
+# Chow Chooser
 
 A realtime voting system for one of life's most important questions: Where the hell should we go to lunch?
 
@@ -16,7 +16,7 @@ Install [leiningen](https://github.com/technomancy/leiningen), then run
 
 ```
 $ lein uberjar
-$ java -jar target/lunchpick-*-standalone.jar
+$ java -jar target/chow-chooser-*-standalone.jar
 ```
 
 This spins up a server on localhost, port 8000.

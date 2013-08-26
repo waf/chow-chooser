@@ -1,7 +1,7 @@
-(ns lunchpick.core
+(ns chow-chooser.core
   (:use [compojure.core]
         [compojure.route])
-  (:require [lunchpick.message-handler :as handler]
+  (:require [chow-chooser.message-handler :as handler]
             [org.httpkit.server :as httpkit]
             [ring.util.response :as response])
   (:gen-class))

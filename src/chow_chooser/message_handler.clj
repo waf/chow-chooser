@@ -1,7 +1,7 @@
-(ns lunchpick.message-handler
+(ns chow-chooser.message-handler
   (:use [org.httpkit.server])
-  (:require [lunchpick.channel-manager :as channel-mgr]
-            [lunchpick.vote-manager :as vote-mgr]
+  (:require [chow-chooser.channel-manager :as channel-mgr]
+            [chow-chooser.vote-manager :as vote-mgr]
             [clojure.data.json :as json]))
 
 (defn vote-message [request]

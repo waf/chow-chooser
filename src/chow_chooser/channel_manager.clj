@@ -1,4 +1,4 @@
-(ns lunchpick.channel-manager
+(ns chow-chooser.channel-manager
   (:use [org.httpkit.server :only [send!]])
   (:require [clojure.data.json :as json]))
 

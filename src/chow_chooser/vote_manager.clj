@@ -1,4 +1,4 @@
-(ns lunchpick.vote-manager
+(ns chow-chooser.vote-manager
   (require [clojure.set :refer [union]]))
 
 (def votes (atom {})) ;durable persistence is for sissies. Map of restaurant->[usernames]
