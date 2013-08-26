@@ -2,6 +2,8 @@
 
 A realtime voting system for one of life's most important questions: Where the hell should we go to lunch?
 
+![Application Screenshot](https://raw.github.com/waf/lunchpick/master/resources/screenshot/chow-chooser.png)
+
 Written in Clojure (Compojure, HTTP Kit), WebSockets, AngularJS.
 
 ## Status
