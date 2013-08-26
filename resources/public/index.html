@@ -31,11 +31,11 @@
                         It's a tie between 
                         <span ng-repeat="restaurant in winner"><span ng-show="$middle">,</span>
                             <span ng-show="$last">and</span>
-                            <strong class="restaurant">{{restaurant}}!</strong></span>
+                            <strong class="restaurant">{{restaurant}}</strong></span>!
                     </p>
                 </div>
                 <div class="history">
-                    <h2>Activity</h2>
+                    <h2>Recent Activity</h2>
                     <ol>
                         <li ng-repeat="logitem in history | orderBy:'-time' | limitTo:5" ng-animate="'animate'">{{logitem.text}}</li>
                     </ol>
