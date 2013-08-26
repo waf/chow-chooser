@@ -1,10 +1,27 @@
 html {
     background: url('../image/Hankyu_Ferry_-_Tsukushi_-_Restaurant_-_01_blur.JPG') no-repeat center center fixed; 
-    font-family:'Droid Sans', sans-serif;
+    font-family:'PT Sans', sans-serif;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    color:#fff;
+}
+h1 {
+    text-align:center;
+    text-shadow:0 0 5px #000;
+}
+.tagline {
+    text-align:center;
+    position:relative;
+    bottom:0;
+}
+.user {
+    position:absolute;
+    right:0;
+    top:0;
+    margin:0;
+    padding:5px;
 }
 form {
     position:relative;
@@ -13,7 +30,7 @@ form {
     box-shadow:0 0 5px #000;
     margin:0 auto;
 }
-input[type=text] {
+.new-restaurant {
     background-color:transparent;
     border: none;
     color:#fff;
@@ -28,14 +45,14 @@ input[type=text] {
     left: 200px;
     cursor:pointer;
 }
-input[type=text]:focus::-webkit-input-placeholder { color:transparent; }
-input[type=text]::-webkit-input-placeholder { color: #FFF; }
-input[type=text]:focus::-moz-placeholder { color:transparent; }
-input[type=text]::-moz-placeholder { color: #FFF; }
-input[type=text]:focus::-ms-input-placeholder { color:transparent; }
-input[type=text]:-ms-input-placeholder { color: #FFF; }
-input[type=text]:focus::input-placeholder { color:transparent; }
-input[type=text]:input-placeholder { color: #FFF; }
+.new-restaurant:focus::-webkit-input-placeholder { color:transparent; }
+.new-restaurant::-webkit-input-placeholder { color: #FFF; }
+.new-restaurant:focus::-moz-placeholder { color:transparent; }
+.new-restaurant::-moz-placeholder { color: #FFF; }
+.new-restaurant:focus::-ms-input-placeholder { color:transparent; }
+.new-restaurant:-ms-input-placeholder { color: #FFF; }
+.new-restaurant:focus::input-placeholder { color:transparent; }
+.new-restaurant:input-placeholder { color: #FFF; }
 
 svg text {
     fill:#fff;

@@ -1,7 +1,7 @@
-var App = angular.module('app', []);
-App.controller('AppCtrl', function($socket, $scope) {
+var App = angular.module('app', ['ngCookies']);
+App.controller('AppCtrl', function($socket, $scope, $cookies) {
     $scope.votes = {};
-    $scope.user = Math.floor(Math.random() * 100);
+    $scope.user = $cookies.user = $cookies.user || prompt("Please enter your name:");
     $scope.voteSubmitted = function() {
         castVote(this.restaurant, $scope.user);
         this.restaurant = '';
@@ -59,6 +59,6 @@ App.controller('AppCtrl', function($socket, $scope) {
     }
     function userHasVotedForRestaurant(restaurant, user) {
         return $scope.votes[restaurant] && 
-            $scope.votes[restaurant].indexOf($scope.user) !== -1;
+            $scope.votes[restaurant].indexOf(user) !== -1;
     }
 });

@@ -2,20 +2,23 @@
 <html lang="en" ng-app="app">
     <head>
         <meta charset="UTF-8">
-        <link href='//fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css' />
+        <title>Chow Chooser</title>
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="style/site.css" />
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+        <script src="//code.angularjs.org/1.1.5/angular-cookies.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js"></script>
-
-        
         <script src="script/app.js"></script>
         <script src="script/angular-socket.js"></script>
         <script src="script/vote-chart.js"></script>
     </head>
     <body ng-controller="AppCtrl">
+        <p class="user">Welcome, {{user}}</p>
+        <h1>Chow Chooser</h1>
         <form name="lunchform" id="lunchform" ng-submit="voteSubmitted(restaurant)">
-            <input placeholder="+ Add a Restaurant" type="text" name="restaurant" id="restaurant" ng-model="restaurant" autocomplete="off" maxlength="20" />
+            <input class="new-restaurant" placeholder="+ Add a Restaurant" type="text" name="restaurant" id="restaurant" ng-model="restaurant" autocomplete="off" maxlength="20" />
             <svg ng-click="svgClicked($event)"></svg>
         </form>
+        <p class="tagline">All aboard the lunch train</p>
     </body>
 </html>
